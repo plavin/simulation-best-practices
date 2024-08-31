@@ -1,16 +1,27 @@
 # Computer Architecture Simulation Best Practices
 
-This document is an attempt to collect knowledge of computer architecture simulation practices that can be used for program analysis, hardware design and next-generation development of computer systems.
+This document is an attempt to collect knowledge of computer architecture simulation practices that can be used for program analysis, hardware design, and next-generation development of computer systems.
 
-One of the difficulties in computer architecture simulation is the need for speeding up the [very long simulation times][sabu2022lcddfma]. Over the past few decades, researchers and practitioners have use a myriad of techniques to accomplish this goal. But, rarely do we document both the successes and limitations of such techniques. In many cases, some techniques can be applicable to some workload types, and some might not be. In addition, there can be some methodologies that perform better for specific classes of applications. It is these set of trade-offs that we aim to present in this document, in addition to links to complete tutorials and use cases. We hope, that as these methodologies improve over time, we can continue to augment this document so that it can become a way to bring the collective knowledge of years of computer architecture research to a single place.
+One of the difficulties in computer architecture simulation is the need for speeding up the [very long simulation times][sabu2022lcddfma]. Over the past few decades, researchers and practitioners have used a myriad of techniques to accomplish this goal. But, rarely do we document both the successes and limitations of such techniques. In many cases, some techniques can be applicable to some workload types, and some might not be. In addition, there can be some methodologies that perform better for specific classes of applications. It is this set of trade-offs that we aim to present in this document, in addition to links to complete tutorials and use cases. We hope that as these methodologies improve over time, we can continue to augment this document so that it can become a way to bring the collective knowledge of years of computer architecture research to a single place.
+
+<!-- TOC start -->
+
+- [Computer Architecture Overview](#computer-architecture-overview)
+   * [Computer Architecture Simulation](#computer-architecture-simulation)
+   * [Computer Architecture Simulators](#computer-architecture-simulators)
+- [Computer Architecture Simulation Methodologies](#computer-architecture-simulation-methodologies)
+   * [Synthetic Workload Generation](#synthetic-workload-generation)
+   * [Workload Sampling](#workload-sampling)
+
+<!-- TOC end -->
 
 ## Computer Architecture Overview
 
-Computer architecture at a high level can be described as "the internal organization of a computer in an abstract way; that is, it defines the capabilities of the computer and its programming model." [[1]][clements1992tpoch] It also includes the [Instruction Set Architecture (ISA)][wikipedia_isa] design, microarchitecture design and logic design and implementation [[2]][hennessy2011caaqa], [[3]][wikipedia_comp_arch].
+Computer architecture at a high level can be described as "the internal organization of a computer in an abstract way; that is, it defines the capabilities of the computer and its programming model." [[1]][clements1992tpoch] It also includes the [Instruction Set Architecture (ISA)][wikipedia_isa] design, microarchitecture design, and logic design and implementation [[2]][hennessy2011caaqa], [[3]][wikipedia_comp_arch].
 
 ### Computer Architecture Simulation
 
-The [timing simulation][wikipedia_timing_simulation] next-generation computer sytems allows us to understand the performance of a new architecture that exists, or has yet to be built. This includes the timing of critical components, and tends to be at the cycle-level, but does not need to simulate [down to the transistor or logic layers][wikipedia_circuit_design] (although, using [logic synthesis][wikipedia_logic_synthesis] and layout design flows can help to provide more accurate enery, power and area analysis). Timing simulation is different from [architecture (or ISA) emulation][wikipedia_emulation]. Emulating a computer system typically refers to being able to functionally model an ISA of that system, which can be done with popular emulators like [QEMU][qemu].
+The [timing simulation][wikipedia_timing_simulation] next-generation computer sytems allows us to understand the performance of a new architecture that exists, or has yet to be built. This includes the timing of critical components, and tends to be at the cycle-level, but does not need to simulate [down to the transistor or logic layers][wikipedia_circuit_design] (although, using [logic synthesis][wikipedia_logic_synthesis] and layout design flows can help to provide more accurate energy, power, and area analysis). Timing simulation is different from [architecture (or ISA) emulation][wikipedia_emulation]. Emulating a computer system typically refers to being able to functionally model an ISA of that system, which can be done with popular emulators like [QEMU][qemu].
 
 ### Computer Architecture Simulators
 
@@ -30,11 +41,11 @@ Running modern workloads like the reference (large) inputs of the [SPEC CPU2017 
 
 ### Synthetic Workload Generation
 
-It is possible to generate small, synthetic workloads that take significantly less time to simulate, like has been done with [previous][kim2006wsgbwfsep] [works][liang2023deacfncs]. As with all methodologies, there are tradeoffs for using them. For [Ditto][liang2023deacfncs], a recent work focusing on synthesizing workloads for datacenters, the techniques can do well when mimicking traditional CPU performance behaviors, like branch mispredictions, cache miss rates, and IPC, these workloads generation techniques [might not be applicable to all workload studies][liang2023deacfncs], like cache compression or prefetching.
+It is possible to generate small, synthetic workloads that take significantly less time to simulate, like has been done with [previous][kim2006wsgbwfsep] [works][liang2023deacfncs]. As with all methodologies, there are tradeoffs for using them. For [Ditto][liang2023deacfncs], a recent work focusing on synthesizing workloads for data centers, the techniques can do well when mimicking traditional CPU performance behaviors, like branch mispredictions, cache miss rates, and IPC, these workloads generation techniques [might not be applicable to all workload studies][liang2023deacfncs], like cache compression or prefetching.
 
 ### Workload Sampling
 
-Instead of generating smaller, synthetic workloads, it can be possible to simulate a representative portion of the actual application's execution. In this way, it can now be possible to simulate the original workloads more quickly than before. Two of the most prevalent methodologies are the [SMARTS][wunderlich2003samsvrss] and [SimPoint][sherwood2002aclspb] methodologies that are based on statistical sampling, and region similarity detection, respectively.
+Instead of generating smaller, synthetic workloads, it can be possible to simulate a representative portion of the actual application's execution. In this way, it can now be possible to simulate the original workloads more quickly than before. Two of the most prevalent methodologies are the [SMARTS][wunderlich2003samsvrss] and [SimPoint][sherwood2002aclspb] methodologies, which are based on statistical sampling and region similarity detection, respectively.
 
 [sabu2022lcddfma]: http://doi.org/10.1109/HPCA53966.2022.00051
 [clements1992tpoch]: https://dl.acm.org/doi/abs/10.5555/531245
