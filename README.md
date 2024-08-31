@@ -30,7 +30,7 @@ Running modern workloads like the reference (large) inputs of the [SPEC CPU2017 
 
 ### Synthetic Workload Generation
 
-It is possible to generate small, synthetic workloads that take significantly less time to simulate, like has been done with [previous][kim2006wsgbwfsep] [works][liang2023deacfncs]. As with all methodologies, there are tradeoffs for using them. For [Ditto][liang2023deacfncs], a recent work focusing on synthesizing workloads for datacenters, the techniques can do well when mimicing traditional CPU performance behaviors, like branch mispredictions, cache miss rates, and IPC, these workloads generation techniques [might not be applicable to all workload studies][liang2023deacfncs], like cache compression or prefetching.
+It is possible to generate small, synthetic workloads that take significantly less time to simulate, like has been done with [previous][kim2006wsgbwfsep] [works][liang2023deacfncs]. As with all methodologies, there are tradeoffs for using them. For [Ditto][liang2023deacfncs], a recent work focusing on synthesizing workloads for datacenters, the techniques can do well when mimicking traditional CPU performance behaviors, like branch mispredictions, cache miss rates, and IPC, these workloads generation techniques [might not be applicable to all workload studies][liang2023deacfncs], like cache compression or prefetching.
 
 ### Workload Sampling
 
