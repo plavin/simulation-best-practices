@@ -56,10 +56,31 @@ Instead of generating smaller, synthetic workloads, it can be possible to simula
 [COTSon][argollo2009cotson] extended the simulation scope to encompass the entire software stack and hardware models, ensuring both high performance and accuracy.
 [Time-based sampling][ardestani2013tbs] [methodologies][carlson2013tbs] pioneered a generic simulation framework for multi-threaded applications, employing time progression rather than instruction count. However, this approach was constrained by the execution time of the program, limiting its ability to identify program structures. Neither SimFlex nor Time-based Sampling leveraged software-specific knowledge, such as barriers, tasks, and loops, to inform the decomposition of programs into representative regions.
 [BarrierPoint][carlson2014barrierpoint] and [TaskPoint][grass2018taskpoint] are based on the structural characteristics of multi-threaded programs, utilizing barrier synchronization primitives and tasks as units of work, respectively. This approach enabled the automatic identification of software regularities based on the inherent synchronization primitives. Nonetheless, these methods were restricted by their dependence on specific programming paradigms, limiting their general applicability.
-[LoopPoint][sabu2022lcddfma] proposed a generic profiling-based sampling methodology that eschewed assumptions about software style, employing loop boundaries as a heuristic for delineating representative regions. However, this heuristic failed to exploit the hierarchical nature of programs and lacked support for dynamic software and hardware changes.
+[LoopPoint][sabu2022lcddfma] proposed a generic profiling-based sampling methodology that eschewed assumptions about software style, employing loop boundaries as a heuristic for delineating representative regions. However, this heuristic failed to exploit the hierarchical nature of programs and lacked support for dynamic software and hardware changes. [Pac-Sim][liu2024pacsim] employs live profiling and region classification to enable the sampled simulation of multi-threaded applications in the presence of hardware and software dynamism.
 
 Kambadur et al. introduced a [sampling solution for Intel GPU workloads][kambadur2015fcgdwg] building upon [GTPin][skaletsky2022gtpin], employing kernel names, arguments, and basic block entries to identify representative regions within GPU programs at a kernel-level granularity. 
 [TBPoint][huang2014tbpoint] utilized BBVs and other kernel-specific features to pinpoint representative kernels, while [Principal Kernel Analysis (PKA)][baddouh2021pka] monitored IPC variations between sampling units to identify regions suitable for fast-forwarding. Both [TBPoint][huang2014tbpoint] and [PKA][baddouh2021pka] facilitated the sampled simulation of GPU workloads at both inter- and intra-kernel levels. [Sieve][tahan2023sieve] extended previous research, demonstrating that combining kernel names and instruction counts led to more effective sample selection. [Photon][liu2023photon] employed GPU BBVs for both inter- and intra-kernel workload sampling, resulting in a substantial enhancement in sampling accuracy compared to prior methods.
+
+The table below outlines the sampled simulation methodologies and their applicability.
+<div align="center">
+
+| Methodology | Analysis Type | Parallel Simulation | Warmup | Applicability/Workloads |
+| :-- | :--: | :--: | --- | --- |
+| [SimPoint][sherwood2002aclspb] | ▣ | ✔️ | Prev Region | Single-threaded CPU |
+| [SMARTS][wunderlich2003samsvrss] | □ | ❌️ | Functional | Single-threaded CPU |
+| [LiveSim][hassani2016livesim] | ▣ | ✔️ | Checkpoint | Single-threaded CPU |
+| [SimFlex][wenisch2006simflex] | □ | ❌️ | Checkpoint | Multi-program CPU |
+| [Time-based][ardestani2013tbs] [sampling][carlson2013tbs] | □ | ❌️ | Functional | Multi-threaded CPU |
+| [BarrierPoint][carlson2014barrierpoint] | ▣ | ✔️ | Prev Region | Multi-threaded CPU |
+| [TaskPoint][grass2018taskpoint] | ▣ | ✔️ | Prev Region | Task-based CPU |
+| [LoopPoint][sabu2022lcddfma] | ▣ | ✔️ | Prev Region | Multi-threaded CPU |
+| [Pac-Sim][liu2024pacsim] | ● | ✔️ | Statistical | Multi-threaded CPU |
+
+▣ Profile-driven analysis &emsp; □ Statistical analysis &emsp; ● Online profiling
+
+</div>
+
+
 
 [sabu2022lcddfma]: http://doi.org/10.1109/HPCA53966.2022.00051
 [clements1992tpoch]: https://dl.acm.org/doi/abs/10.5555/531245
@@ -97,4 +118,6 @@ Kambadur et al. introduced a [sampling solution for Intel GPU workloads][kambadu
 [baddouh2021pka]: https://doi.org/10.1145/3466752.3480100
 [tahan2023sieve]: https://doi.org/10.1109/ISPASS57527.2023.00030
 [liu2023photon]: https://doi.org/10.1145/3613424.3623773
+[liu2024pacsim]: https://doi.org/10.1145/3680548
+
 
