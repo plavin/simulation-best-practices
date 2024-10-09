@@ -34,6 +34,24 @@ There are a large number of computer architecture simulators in use today. Below
 * GPU Simulators
     * [Accel-Sim][sim_accelsim]
     * [MGPUSim][sim_mgpusim]
+* Heterogeneous Simulators
+    * gem5 APU simulator 
+    * gem5-gpu
+* Full-system Simulators
+    * gem5 
+    * [Simics][magnusson2002simics]
+* Distributed Systems/Network Systems: 
+    * [dist-gem5][alian2017distgem5]
+    * [SimBricks][li2022simbricks]
+* RTL Simulators
+    * Vivado
+    * Verilator
+    * [Parendi][emami2024parendi]
+* FPGA-Accelerated Simulators
+    * [FireSim][karandikar2018firesim]
+    * [Simmani][kim2019simmani]
+* Analytical Models
+    * [SparseLoop][wu2022sparseloop]
 
 ## Computer Architecture Simulation Methodologies
 
@@ -119,5 +137,12 @@ The table below outlines the sampled simulation methodologies and their applicab
 [tahan2023sieve]: https://doi.org/10.1109/ISPASS57527.2023.00030
 [liu2023photon]: https://doi.org/10.1145/3613424.3623773
 [liu2024pacsim]: https://doi.org/10.1145/3680548
+[magnusson2002simics]: https://doi.org/10.1109/2.982916
+[alian2017distgem5]: https://doi.org/10.1109/ISPASS.2017.7975287
+[li2022simbricks]: https://doi.org/10.1145/3544216.3544253
+[emami2024parendi]: https://doi.org/10.48550/arXiv.2403.04714
+[karandikar2018firesim]: https://doi.org/10.1109/ISCA.2018.00014 
+[kim2019simmani]: https://doi.org/10.1145/3352460.3358322 
+[wu2022sparseloop]: https://doi.org/10.1109/MICRO56248.2022.00096
 
 
