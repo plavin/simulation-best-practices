@@ -76,6 +76,7 @@ The following steps are based on QFlex toolchain and single-node simulation.
 10. Aggregate the UIPC from all flex points and calculate the Coefficient of Variation (CV).
 
 If the CV is larger than the required value (based on the confidence level and acceptable error range), adjust the sample size and repeat steps 7 through 10. For a normal distribution population, the sample size for the next iteration is given by the following formula:
+
 $$
 n\geq\left(\frac{z\ \mathrm{CV}}{e}\right)^2
 $$
@@ -88,7 +89,7 @@ where $z$ score can be calculated from the confidence level, and $e$ as the acce
 
 Motivation: Functional warming limits simulation throughput, because over 99% of the instructions are simulated by the functional warming simulator. The functional warming simulator used by SimFlex is single-threaded. One way to improve simulation throughput is to start functional warming from multiple places within the population, i.e., multi-epoch functional warming.
 
-![]()
+![](fig/multi-epoch.svg)
 
 Steps:
 1. Determine the number of epochs based on the available resources (CPU cores, memory, disk) on your host.
@@ -110,9 +111,12 @@ Steps:
 - Support for performance metrics beyond throughput: The SimFlex methodology assumes UIPC as the performance metric, which correlates with throughput. However, server workloads also involve other performance metrics, such as tail latency.
 
 
-Reference
+## Reference
 [1] Wunderlich, R. E., et al. SMARTS: Accelerating microarchitecture simulation via rigorous statistical sampling. In Proceedings of the 30th annual international symposium on Computer architecture. (2003).
+
 [2] Wenisch, Thomas F., et al. "SimFlex: statistical sampling of computer system simulation." IEEE Micro 26.4 (2006).
+
 [3]  Alameldeen, Alaa R., and David A. Wood. "Variability in architectural simulations of multi-threaded workloads." The Ninth International Symposium on High-Performance Computer Architecture, 2003. HPCA-9 2003.
+
 [4] Alameldeen, Alaa R., and David A. Wood. "IPC considered harmful for multiprocessor workloads." IEEE Micro 26.4 (2006).
 
