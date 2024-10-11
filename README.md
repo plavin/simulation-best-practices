@@ -36,16 +36,24 @@ There are a large number of computer architecture simulators in use today. Below
     * [MGPUSim][sim_mgpusim]
 * Heterogeneous Simulators
     * gem5 APU simulator 
-    * gem5-gpu
+    * [gem5-gpu][power2014gem5gpu]
 * Full-system Simulators
-    * gem5 
+    * [gem5][sim_gem5] 
     * [Simics][magnusson2002simics]
-* Distributed Systems/Network Systems: 
+* Distributed Systems/Network Systems:
+    * [SST][rodrigues2011sst]
     * [dist-gem5][alian2017distgem5]
     * [SimBricks][li2022simbricks]
 * RTL Simulators
-    * Vivado
-    * Verilator
+    * [Verilator][snyder2004verilator]
+    * [Icarus Verilog][williams2002iverilog]
+    * ModelSim
+    * XSIM
+    * QuestaSim
+    * NCSim
+    * VCS
+    * Riviera-PRO
+    * CVC
     * [Parendi][emami2024parendi]
 * FPGA-Accelerated Simulators
     * [FireSim][karandikar2018firesim]
@@ -144,5 +152,7 @@ The table below outlines the sampled simulation methodologies and their applicab
 [karandikar2018firesim]: https://doi.org/10.1109/ISCA.2018.00014 
 [kim2019simmani]: https://doi.org/10.1145/3352460.3358322 
 [wu2022sparseloop]: https://doi.org/10.1109/MICRO56248.2022.00096
-
-
+[rodrigues2011sst]: https://doi.org/10.1145/1964218.1964225 
+[power2014gem5gpu]: https://doi.org/10.1109/LCA.2014.2299539 
+[williams2002iverilog]: https://dl.acm.org/doi/fullHtml/10.5555/513581.513584 
+[snyder2004verilator]: https://veripool.org/verilator/
