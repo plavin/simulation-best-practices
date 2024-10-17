@@ -107,6 +107,20 @@ The table below outlines the sampled simulation methodologies and their applicab
 </div>
 
 
+### Checkpoint Format
+
+
+Checkpoints allow for state exchange among multiple simulators, leveraging the strengths of each. For instance, in sampled simulation, a fast warming simulator that samples workloads can export checkpoints to a detailed simulator, which, though slower, provides precise performance data. This approach enhances simulation speed while maintaining accuracy.
+
+Checkpoints can be categorized based on the type of state they save:
+
+- Architectural checkpoint: Captures the architectural (software-visible) state, including the register files of cores, memory, and I/O device states. Popular emulators like QEMU, Simics, gem5, and VM hypervisors (e.g., KVM) maintain these states.
+- Microarchitectural checkpoint: Captures the states of microarchitectural components such as pipelines, caches, branch predictors, TLBs, on-chip network virtual channels, and DRAM controllers.
+
+Research on checkpoints focuses on storage and adaptability. Storage solutions include compression (e.g., QEMU's incremental disk checkpoint and Simics) and pruning techniques like [Livepoints](livepoints), which stores only the state needed for a following short detailed simulation window. Statistical profiles, such as [MRRL](mrrl) and [BLRL](mlrl), store reuse distribution data to save space and are naturally to extrapolate.
+
+Adaptability is achieved by storing metadata as hints for post-processing. For example, [Memory Timestamp Record (MTR)](mtr) tracks each core's last read/write timestamp for every cache line, making it compatible with cache hierarchies that use any write-invalidate coherence state and LRU replacement policy. The aforementioned statistical profiles can also be naturally extrapolated to any cache capacity.
+
 
 [sabu2022lcddfma]: http://doi.org/10.1109/HPCA53966.2022.00051
 [clements1992tpoch]: https://dl.acm.org/doi/abs/10.5555/531245
@@ -156,3 +170,8 @@ The table below outlines the sampled simulation methodologies and their applicab
 [power2014gem5gpu]: https://doi.org/10.1109/LCA.2014.2299539 
 [williams2002iverilog]: https://dl.acm.org/doi/fullHtml/10.5555/513581.513584 
 [snyder2004verilator]: https://veripool.org/verilator/
+[mtr]: https://ieeexplore.ieee.org/document/1430560
+[bpc]: https://ieeexplore.ieee.org/document/1620787
+[livepoints]: https://ieeexplore.ieee.org/abstract/document/1620785
+[mrrl]: https://ieeexplore.ieee.org/abstract/document/1190246
+[blrl]: https://academic.oup.com/comjnl/article/48/4/451/344691
