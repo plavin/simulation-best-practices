@@ -54,12 +54,20 @@ There are a large number of computer architecture simulators in use today. Below
     * VCS
     * Riviera-PRO
     * CVC
+    * [RepCut][wang2023repcut]
     * [Parendi][emami2024parendi]
 * FPGA-Accelerated Simulators
     * [FireSim][karandikar2018firesim]
     * [Simmani][kim2019simmani]
 * Analytical Models
+    * [Roofline][williams2009roofline]
+    * [GPUMech][huang2014gpumech]
+    * [Aladdin][shao2014aladdin]
+    * [Gables][hill2019gables]
+    * [FFM][welton2019ffm]
+    * [RPPM][pestel2019rppm]
     * [SparseLoop][wu2022sparseloop]
+    * [CiMLoop][andrulis2024cimloop]
 
 ## Computer Architecture Simulation Methodologies
 
@@ -67,7 +75,9 @@ Running modern workloads like the reference (large) inputs of the [SPEC CPU2017 
 
 ### Synthetic Workload Generation
 
-It is possible to generate small, synthetic workloads that take significantly less time to simulate, like has been done with [previous][kim2006wsgbwfsep] [works][liang2023deacfncs]. As with all methodologies, there are tradeoffs for using them. For [Ditto][liang2023deacfncs], a recent work focusing on synthesizing workloads for data centers, the techniques can do well when mimicking traditional CPU performance behaviors, like branch mispredictions, cache miss rates, and IPC, these workloads generation techniques [might not be applicable to all workload studies][liang2023deacfncs], like cache compression or prefetching.
+It is possible to generate small, synthetic workloads that take significantly less time to simulate, like has been done with [previous][kim2006wsgbwfsep] [works][liang2023deacfncs]. As with all methodologies, there are tradeoffs for using them. 
+[MAMPO][ganesan2011mampo] is a multithreaded synthetic power virus generation framework targeting multicore systems. It uses a genetic algorithm to search for the best power virus for a given multicore system configuration. [SynchroTrace][nilakantan2015synchrotrace] is a trace-based multi-threaded simulation methodology that accurately replays synchronization- and dependency-aware traces for chip multiprocessor systems. SynchroTrace achieves this by recording synchronization events and dependencies in the traces, allowing for the replay on different hardware platforms. [GPGPU-Minibench][yu2015gpgpuminibench] captures the execution behavior of existing GPGPU workloads in a profile, which includes a divergence flow statistics graph (DFSG) to characterize the dynamic control flow behavior of a GPGPU kernel. GPGPU-MiniBench generates a synthetic miniature GPGPU kernel that exhibits similar execution characteristics as the original workload. [G-MAP][panda2017gmap] statistically models the GPU memory access stream locality by considering the regularity in code-localized memory access patterns and the parallelism in the execution model to create miniaturized memory proxies. [Mystique][liang2023mystique] is yet another technique that generates benchmarks from production AI models by leveraging PyTorch execution traces. 
+For [Ditto][liang2023deacfncs], another recent work focusing on synthesizing workloads for data centers, the techniques can do well when mimicking traditional CPU performance behaviors, like branch mispredictions, cache miss rates, and IPC, these workloads generation techniques [might not be applicable to all workload studies][liang2023deacfncs], like cache compression or prefetching.
 
 ### Workload Sampling
 
@@ -107,7 +117,7 @@ The table below outlines the sampled simulation methodologies and their applicab
 </div>
 
 
-### Checkpoint Format
+### Checkpointing Techniques
 
 
 Checkpoints allow for state exchange among multiple simulators, leveraging the strengths of each. For instance, in sampled simulation, a fast warming simulator that samples workloads can export checkpoints to a detailed simulator, which, though slower, provides precise performance data. This approach enhances simulation speed while maintaining accuracy.
@@ -117,9 +127,9 @@ Checkpoints can be categorized based on the type of state they save:
 - Architectural checkpoint: Captures the architectural (software-visible) state, including the register files of cores, memory, and I/O device states. Popular emulators like QEMU, Simics, gem5, and VM hypervisors (e.g., KVM) maintain these states.
 - Microarchitectural checkpoint: Captures the states of microarchitectural components such as pipelines, caches, branch predictors, TLBs, on-chip network virtual channels, and DRAM controllers.
 
-Research on checkpoints focuses on storage and adaptability. Storage solutions include compression (e.g., QEMU's incremental disk checkpoint and Simics) and pruning techniques like [Livepoints](livepoints), which stores only the state needed for a following short detailed simulation window. Statistical profiles, such as [MRRL](mrrl) and [BLRL](mlrl), store reuse distribution data to save space and are naturally to extrapolate.
+Research on checkpoints focuses on storage and adaptability. Storage solutions include compression (e.g., QEMU's incremental disk checkpoint and Simics) and pruning techniques like [Livepoints](wenisch2006livepoints), which stores only the state needed for a following short, detailed simulation window. Statistical profiles, such as [MRRL](haskins2003mrrl) and [BLRL](eeckhout2005blrl), store reuse distribution data to save space and are natural to extrapolate.
 
-Adaptability is achieved by storing metadata as hints for post-processing. For example, [Memory Timestamp Record (MTR)](mtr) tracks each core's last read/write timestamp for every cache line, making it compatible with cache hierarchies that use any write-invalidate coherence state and LRU replacement policy. The aforementioned statistical profiles can also be naturally extrapolated to any cache capacity.
+Adaptability is achieved by storing metadata as hints for post-processing. For example, [Memory Timestamp Record (MTR)](barr2005mtr) tracks each core's last read/write timestamp for every cache line, making it compatible with cache hierarchies that use any write-invalidate coherence state and LRU replacement policy. The aforementioned statistical profiles can also be naturally extrapolated to any cache capacity.
 
 
 [sabu2022lcddfma]: http://doi.org/10.1109/HPCA53966.2022.00051
@@ -170,8 +180,21 @@ Adaptability is achieved by storing metadata as hints for post-processing. For e
 [power2014gem5gpu]: https://doi.org/10.1109/LCA.2014.2299539 
 [williams2002iverilog]: https://dl.acm.org/doi/fullHtml/10.5555/513581.513584 
 [snyder2004verilator]: https://veripool.org/verilator/
-[mtr]: https://ieeexplore.ieee.org/document/1430560
-[bpc]: https://ieeexplore.ieee.org/document/1620787
-[livepoints]: https://ieeexplore.ieee.org/abstract/document/1620785
-[mrrl]: https://ieeexplore.ieee.org/abstract/document/1190246
-[blrl]: https://academic.oup.com/comjnl/article/48/4/451/344691
+[barr2005mtr]: https://doi.org/10.1109/ISPASS.2005.1430560
+[barr2006bpc]: https://doi.org/10.1109/ISPASS.2006.1620787
+[wenisch2006livepoints]: https://ieeexplore.ieee.org/abstract/document/1620785
+[haskins2003mrrl]: https://doi.org/10.1109/ISPASS.2003.1190246
+[eeckhout2005blrl]: https://doi.org/10.1093/comjnl/bxh103
+[wang2023repcut]: https://doi.org/10.1145/3582016.3582034
+[williams2009roofline]: https://doi.org/10.1145/1498765.1498785
+[huang2014gpumech]: https://doi.org/10.1109/MICRO.2014.59 
+[shao2014aladdin]: https://doi.org/10.1145/2678373.2665689 
+[hill2019gables]: https://doi.org/10.1109/HPCA.2019.00047 
+[welton2019ffm]: https://doi.org/10.1145/3295500.3356213 
+[pestel2019rppm]: https://doi.org/10.1109/ISPASS.2019.00038 
+[andrulis2024cimloop]: https://doi.ieeecomputersociety.org/10.1109/ISPASS61541.2024.00012 
+[ganesan2011mampo]: https://doi.org/10.1145/2063384.2063455 
+[nilakantan2015synchrotrace]: https://doi.org/10.1109/ISPASS.2015.7095813 
+[yu2015gpgpuminibench]: https://doi.org/10.1109/TC.2015.2395427
+[panda2017gmap]: https://doi.org/10.1145/3061639.3062320
+[liang2023mystique]: https://doi.org/10.1145/3579371.3589072 
