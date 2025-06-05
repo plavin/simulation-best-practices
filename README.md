@@ -31,6 +31,9 @@ There are a large number of computer architecture simulators in use today. Below
     * [gem5][sim_gem5]
     * [SimFlex][sim_simflex]
     * [Sniper][sim_sniper]
+    * [SST/Vanadis][sst_vanadis]
+* Memory System Simulators
+    * [SST/memHierarchy][sst_memhierarchy]
 * GPU Simulators
     * [Accel-Sim][sim_accelsim]
     * [MGPUSim][sim_mgpusim]
@@ -41,9 +44,10 @@ There are a large number of computer architecture simulators in use today. Below
     * [gem5][sim_gem5] 
     * [Simics][magnusson2002simics]
 * Distributed Systems/Network Systems:
-    * [SST][rodrigues2011sst]
     * [dist-gem5][alian2017distgem5]
     * [SimBricks][li2022simbricks]
+    * [SST/merlin][sst_merlin]
+    * [SST/mercury][sst_mercury]
 * RTL Simulators
     * [Verilator][snyder2004verilator]
     * [Icarus Verilog][williams2002iverilog]
@@ -56,9 +60,12 @@ There are a large number of computer architecture simulators in use today. Below
     * CVC
     * [RepCut][wang2023repcut]
     * [Parendi][emami2024parendi]
+    * [SST/Osseous][sst_osseous]
 * FPGA-Accelerated Simulators
     * [FireSim][karandikar2018firesim]
     * [Simmani][kim2019simmani]
+* Spatial Accelerator Simulators
+    * [SST/llyr][sst_llyr]
 * Analytical Models
     * [Roofline][williams2009roofline]
     * [GPUMech][huang2014gpumech]
@@ -68,6 +75,8 @@ There are a large number of computer architecture simulators in use today. Below
     * [RPPM][pestel2019rppm]
     * [SparseLoop][wu2022sparseloop]
     * [CiMLoop][andrulis2024cimloop]
+* Simulation Frameworks
+    * [SST][sst_simulator]
 
 ## Computer Architecture Simulation Methodologies
 
@@ -176,7 +185,6 @@ Adaptability is achieved by storing metadata as hints for post-processing. For e
 [karandikar2018firesim]: https://doi.org/10.1109/ISCA.2018.00014 
 [kim2019simmani]: https://doi.org/10.1145/3352460.3358322 
 [wu2022sparseloop]: https://doi.org/10.1109/MICRO56248.2022.00096
-[rodrigues2011sst]: https://doi.org/10.1145/1964218.1964225 
 [power2014gem5gpu]: https://doi.org/10.1109/LCA.2014.2299539 
 [williams2002iverilog]: https://dl.acm.org/doi/fullHtml/10.5555/513581.513584 
 [snyder2004verilator]: https://veripool.org/verilator/
@@ -198,3 +206,10 @@ Adaptability is achieved by storing metadata as hints for post-processing. For e
 [yu2015gpgpuminibench]: https://doi.org/10.1109/TC.2015.2395427
 [panda2017gmap]: https://doi.org/10.1145/3061639.3062320
 [liang2023mystique]: https://doi.org/10.1145/3579371.3589072 
+[sst_vanadis]: http://sst-simulator.org/sst-docs/docs/elements/vanadis/intro
+[sst_memhierarchy]: http://sst-simulator.org/sst-docs/docs/elements/memHierarchy/intro
+[sst_merlin]: http://sst-simulator.org/sst-docs/docs/elements/merlin/intro
+[sst_mercury]: http://sst-simulator.org/sst-docs/docs/elements/mercury/intro
+[sst_osseous]: http://sst-simulator.org/sst-docs/docs/elements/osseous/intro
+[sst_llyr]: http://sst-simulator.org/sst-docs/docs/elements/llyr/intro
+[sst_simulator]: http://sst-simulator.org/sst-docs/ 
