@@ -60,7 +60,7 @@ There are a large number of computer architecture simulators in use today. Below
     * CVC
     * [RepCut][wang2023repcut]
     * [Parendi][emami2024parendi]
-    * [SST/Osseous][sst_osseous]
+    * [SST/osseous][sst_osseous]
 * FPGA-Accelerated Simulators
     * [FireSim][karandikar2018firesim]
     * [Simmani][kim2019simmani]
@@ -139,6 +139,10 @@ Checkpoints can be categorized based on the type of state they save:
 Research on checkpoints focuses on storage and adaptability. Storage solutions include compression (e.g., QEMU's incremental disk checkpoint and Simics) and pruning techniques like [Livepoints](wenisch2006livepoints), which stores only the state needed for a following short, detailed simulation window. Statistical profiles, such as [MRRL](haskins2003mrrl) and [BLRL](eeckhout2005blrl), store reuse distribution data to save space and are natural to extrapolate.
 
 Adaptability is achieved by storing metadata as hints for post-processing. For example, [Memory Timestamp Record (MTR)](barr2005mtr) tracks each core's last read/write timestamp for every cache line, making it compatible with cache hierarchies that use any write-invalidate coherence state and LRU replacement policy. The aforementioned statistical profiles can also be naturally extrapolated to any cache capacity.
+
+## Parallel Simulation
+Modern compuers are increasingly parallel, meaning we need to parallelize our simulations in some way to fully utilize these resources. Some projects take the stance that a single-threaded simulation is accepatble, as you will need to run many simulations during your design-space exploration, so you can use many cores by running many single-threaded simulations. Others, however, have written parallel simulators. [SST](sst_simulator) is a conservative parallel discrete event simulator that can parallelize work across multiple processes or threads. It supports checkpointing -- not for the purpose of state transfer as described above, but to enable restarting simulations after nodes fail, as is common in large-scale, long-running simulations.
+
 
 
 [sabu2022lcddfma]: http://doi.org/10.1109/HPCA53966.2022.00051
